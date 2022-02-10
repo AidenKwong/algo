@@ -46,7 +46,7 @@ const SimpleSortViz = () => {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Simeple Sorting Algorithm</h1>
+      <h1>Simeple Sorting Algorithm O(n^2)</h1>
       <form onSubmit={handleRun}>
         <span style={{ fontSize: "1rem" }}>
           {

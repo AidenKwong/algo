@@ -123,7 +123,7 @@ const MergeSortViz = () => {
 
   return (
     <div style={{ padding: "2rem" }}>
-      <h1>Merge Sorting Algorithm</h1>
+      <h1>Merge Sorting Algorithm O(nlogn)</h1>
       <form onSubmit={handleRun}>
         <span style={{ fontSize: "1rem" }}>
           {"Please enter the length of array "}
