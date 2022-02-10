@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const SelectionSortViz = () => {
