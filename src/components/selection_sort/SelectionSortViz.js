@@ -36,7 +36,7 @@ const SelectionSortViz = () => {
           }
         }
 
-        if (min != i) {
+        if (min !== i) {
           // Swapping the elements
 
           var tmp = sortedArr[i];
