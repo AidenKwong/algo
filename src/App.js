@@ -1,5 +1,7 @@
 import "./App.css";
 import BubbleSortViz from "./components/bubble_sort/BubbleSortViz";
+import InsertionSortViz from "./components/insertion_sort/InsertionSortViz";
+import MergeSortViz from "./components/merge_sort/MergeSortViz";
 import SelectionSortViz from "./components/selection_sort/SelectionSortViz";
 import SimpleSortViz from "./components/simple_sort/SimpleSortViz";
 function App() {
@@ -12,6 +14,8 @@ function App() {
       <SimpleSortViz />
       <SelectionSortViz />
       <BubbleSortViz />
+      <InsertionSortViz />
+      <MergeSortViz />
     </div>
   );
 }
