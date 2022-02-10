@@ -38,7 +38,7 @@ function merge(arr, l, m, r) {
   for (var x = 0; x < len1; x++) {
     left[x] = arr[l + x];
   }
-  for (var x = 0; x < len2; x++) {
+  for (x = 0; x < len2; x++) {
     right[x] = arr[m + 1 + x];
   }
 
