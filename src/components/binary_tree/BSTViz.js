@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Node, BinarySearchTree } from "./BST_structure";
+import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
 
 const height = 960;
@@ -32,7 +32,7 @@ const BSTViz = () => {
       .attr("d", linkPathGen)
       .attr("fill", "none")
       .attr("stroke", "black");
-  }, []);
+  });
 
   return (
     <div style={{ padding: "2rem" }}>
