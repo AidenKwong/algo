@@ -19,7 +19,9 @@ const myLink = (d) => {
 const BSTViz = () => {
   const [number, setNumber] = useState(0);
   const [output, setOutput] = useState(BSTTemplate);
+  const [downloadURL, setDownloadURL] = useState("#");
   const containerRef = useRef();
+  const svgRef = useRef();
 
   const handleOnChange = (e) => {
     setNumber(e.target.value);
@@ -28,6 +30,19 @@ const BSTViz = () => {
   const handleRun = (e) => {
     e.preventDefault();
     runBuildTree(number);
+  };
+
+  const handleFork = () => {
+    const svgEl = svgRef.current;
+    svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    var svgData = svgRef.current.outerHTML;
+    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
+    var svgBlob = new Blob([preface, svgData], {
+      type: "image/svg+xml;charset=utf-8",
+    });
+    var svgUrl = URL.createObjectURL(svgBlob);
+    setDownloadURL(svgUrl);
+    alert("BST.svg forked");
   };
 
   const runBuildTree = (n) => {
@@ -104,8 +119,16 @@ const BSTViz = () => {
         ref={containerRef}
         style={{ display: "flex", justifyContent: "center" }}
       >
-        <svg id="BSTViz" />
+        <svg id="BSTViz" ref={svgRef} />
       </div>
+      <span>{"Fork to save current BST image:"}</span>
+
+      <button style={{ margin: "1rem" }} onClick={handleFork}>
+        Fork
+      </button>
+      <a style={{ margin: "1rem" }} href={downloadURL} download="BST.svg">
+        Click here to download
+      </a>
     </div>
   );
 };
