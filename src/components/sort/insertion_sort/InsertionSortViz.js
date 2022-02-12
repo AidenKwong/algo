@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../sort.scss";
 
 const InsertionSortViz = () => {
   const [number, setNumber] = useState(0);
@@ -7,18 +8,15 @@ const InsertionSortViz = () => {
   const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const handleOnChange = (e) => {
-    //input field value
     setNumber(e.target.value);
   };
 
   const handleRun = (e) => {
-    //hit RUN button
     e.preventDefault();
     Simple_Sorting_Algo(number);
   };
 
   const Simple_Sorting_Algo = (n) => {
-    //simple sorting algorithm
     setRunning(true);
     const array = [];
     for (var i = 0; i < n; i++) {
@@ -28,9 +26,8 @@ const InsertionSortViz = () => {
     const sortedArr = [...array];
     const send = async () => {
       for (let i = 1; i < n; i++) {
-        // Choosing the first element in our unsorted subarray
         let current = sortedArr[i];
-        // The last element of our sorted subarray
+
         let j = i - 1;
         while (j > -1 && current < sortedArr[j]) {
           sortedArr[j + 1] = sortedArr[j];
@@ -46,7 +43,7 @@ const InsertionSortViz = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="container">
       <h1>Insertion Sorting Algorithm O(n^2)</h1>
       <form onSubmit={handleRun}>
         <span style={{ fontSize: "1rem" }}>

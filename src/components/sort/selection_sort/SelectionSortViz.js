@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "../sort.scss";
+
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const SelectionSortViz = () => {
@@ -7,12 +9,10 @@ const SelectionSortViz = () => {
   const [output, setOutput] = useState([]);
 
   const handleOnChange = (e) => {
-    //input field value
     setNumber(e.target.value);
   };
 
   const handleRun = (e) => {
-    //hit RUN button
     e.preventDefault();
     selectionSort(number);
   };
@@ -27,8 +27,6 @@ const SelectionSortViz = () => {
 
     const send = async () => {
       for (let i = 0; i < n; i++) {
-        // Finding the smallest number in the subarray
-
         var min = i;
         for (let j = i + 1; j < n; j++) {
           if (sortedArr[j] < sortedArr[min]) {
@@ -37,8 +35,6 @@ const SelectionSortViz = () => {
         }
 
         if (min !== i) {
-          // Swapping the elements
-
           var tmp = sortedArr[i];
           sortedArr[i] = sortedArr[min];
           sortedArr[min] = tmp;
@@ -52,7 +48,7 @@ const SelectionSortViz = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="container">
       <h1>Selection Sorting Algorithm O(n^2)</h1>
       <form onSubmit={handleRun}>
         <span style={{ fontSize: "1rem" }}>

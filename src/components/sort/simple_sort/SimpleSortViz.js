@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../sort.scss";
 
 const SimpleSortViz = () => {
   const [number, setNumber] = useState(0);
@@ -7,18 +8,15 @@ const SimpleSortViz = () => {
   const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
   const handleOnChange = (e) => {
-    //input field value
     setNumber(e.target.value);
   };
 
   const handleRun = (e) => {
-    //hit RUN button
     e.preventDefault();
     Simple_Sorting_Algo(number);
   };
 
   const Simple_Sorting_Algo = (n) => {
-    //simple sorting algorithm
     setRunning(true);
     const array = [];
     for (var i = 0; i < n; i++) {
@@ -45,7 +43,7 @@ const SimpleSortViz = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div className="container">
       <h1>Simeple Sorting Algorithm O(n^2)</h1>
       <form onSubmit={handleRun}>
         <span style={{ fontSize: "1rem" }}>

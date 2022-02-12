@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <div style={{ textAlign: "center" }}>
-        <h1>Sorting Algorithm Visualizer</h1>
+        <h1>Algorithm Visualizer</h1>
       </div>
       <BSTViz />
       <SimpleSortViz />
