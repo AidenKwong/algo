@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
 
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+
 const BSTTemplate = () => {
   const BST = new BinarySearchTree();
   for (var i = 0; i < 5; i++) {
@@ -19,6 +21,7 @@ const myLink = (d) => {
 const BSTViz = () => {
   const [number, setNumber] = useState(0);
   const [output, setOutput] = useState(BSTTemplate);
+  const [running, setRunning] = useState(false);
   const [downloadURL, setDownloadURL] = useState("#");
   const containerRef = useRef();
   const svgRef = useRef();
@@ -45,12 +48,16 @@ const BSTViz = () => {
     alert("BST.svg forked");
   };
 
-  const runBuildTree = (n) => {
+  const runBuildTree = async (n) => {
+    setRunning(true);
     const BST = new BinarySearchTree();
     for (var i = 0; i < n; i++) {
       BST.insert(Math.ceil(Math.random() * 100));
+      await timer(500);
+      setOutput(Object.assign({}, BST));
     }
-    setOutput(BST);
+    setRunning(false);
+    setOutput(Object.assign({}, BST));
   };
 
   useEffect(() => {
@@ -58,9 +65,10 @@ const BSTViz = () => {
     const width = containerRef.current.clientWidth;
     const root = d3.hierarchy(output.root);
     const treeLayout = d3.tree().size([width, height]);
+
     const links = treeLayout(root).links();
     const svg = d3.select("#BSTViz");
-
+    console.log(root.descendants().pop().depth);
     svg
       .attr("width", width)
       .style("height", height)
@@ -71,7 +79,7 @@ const BSTViz = () => {
       .data(links)
       .join("path")
       .transition()
-      .duration(300)
+      .duration(50)
       .attr("d", myLink)
       .attr("fill", "none")
       .attr("stroke", (d) => (d.target.data.data ? "black" : "none"));
@@ -81,7 +89,7 @@ const BSTViz = () => {
       .data(root.descendants())
       .join("text")
       .transition()
-      .duration(300)
+      .duration(50)
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y + 48)
       .attr("text-anchor", "middle")
@@ -109,7 +117,7 @@ const BSTViz = () => {
         <div>
           <button
             style={{ margin: "1rem 0" }}
-            disabled={(number > 100) | (number < 3)}
+            disabled={(number > 100) | (number < 3) | running}
           >
             BUILD
           </button>
@@ -117,13 +125,21 @@ const BSTViz = () => {
       </form>
       <div
         ref={containerRef}
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          height: 960,
+        }}
       >
         <svg id="BSTViz" ref={svgRef} />
       </div>
       <span>{"Fork to save current BST image:"}</span>
 
-      <button style={{ margin: "1rem" }} onClick={handleFork}>
+      <button
+        style={{ margin: "1rem" }}
+        onClick={handleFork}
+        disabled={running}
+      >
         Fork
       </button>
       <a style={{ margin: "1rem" }} href={downloadURL} download="BST.svg">
