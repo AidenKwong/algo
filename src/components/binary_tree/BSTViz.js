@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
-
-const yOffSet = 128;
-
+const yOffSet = 36;
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BSTTemplate = () => {
@@ -24,7 +22,6 @@ const BSTViz = () => {
   const [number, setNumber] = useState(0);
   const [output, setOutput] = useState(BSTTemplate);
   const [running, setRunning] = useState(false);
-  // const [delNode, setDelNode] = useState(null);
   const [downloadURL, setDownloadURL] = useState("#");
   const containerRef = useRef();
   const svgRef = useRef();
@@ -45,10 +42,6 @@ const BSTViz = () => {
     setRunning(false);
     setOutput(structuredClone(BST));
   };
-
-  // const handleDelete = (e) => {
-  //   e.preventDefault();
-  // };
 
   const handleFork = () => {
     const svgEl = svgRef.current;
@@ -126,21 +119,6 @@ const BSTViz = () => {
           </button>
         </div>
       </form>
-      {/* <form onSubmit={handleDelete}>
-        <span style={{ fontSize: "1rem" }}>
-          {"Please enter node you want to delete "}
-        </span>
-        <input
-          onChange={(e) => setDelNode(e.target.value)}
-          style={{ textAlign: "center" }}
-        />
-        <div>
-          <button style={{ margin: "1rem 0" }} disabled={running}>
-            DELETE
-          </button>
-        </div>
-      </form> */}
-
       <div
         ref={containerRef}
         style={{
