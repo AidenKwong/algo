@@ -1,0 +1,26 @@
+.App {
+}
+
+a {
+  text-decoration: none;
+}
+
+.pageNav {
+  display: flex;
+  justify-content: center;
+  list-style-type: none;
+  gap: 2rem;
+}
+
+.vizMain {
+  margin: 2rem;
+}
+
+.vizContainer {
+  display: flex;
+  justify-content: center;
+  background-color: #81b29a;
+  height: 50vh;
+  border: 0.25em solid black;
+  padding: 0.25em 0;
+}

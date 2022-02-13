@@ -2,38 +2,53 @@ import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
 
+const yOffSet = 128;
+
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BSTTemplate = () => {
   const BST = new BinarySearchTree();
   for (var i = 0; i < 5; i++) {
-    BST.insert(`${Math.ceil(Math.random() * 10)} example`);
+    BST.insert(`example: ${Math.ceil(Math.random() * 10)}`);
   }
   return BST;
 };
 
 const myLink = (d) => {
-  return `M ${d.source.x} ${d.source.y + 48} l ${d.target.x - d.source.x} ${
-    d.target.y - d.source.y
-  }`;
+  return `M ${d.source.x} ${d.source.y + yOffSet} l ${
+    d.target.x - d.source.x
+  } ${d.target.y - d.source.y}`;
 };
 
 const BSTViz = () => {
   const [number, setNumber] = useState(0);
   const [output, setOutput] = useState(BSTTemplate);
   const [running, setRunning] = useState(false);
+  // const [delNode, setDelNode] = useState(null);
   const [downloadURL, setDownloadURL] = useState("#");
   const containerRef = useRef();
   const svgRef = useRef();
-
-  const handleOnChange = (e) => {
-    setNumber(e.target.value);
-  };
 
   const handleRun = (e) => {
     e.preventDefault();
     runBuildTree(number);
   };
+
+  const runBuildTree = async (n) => {
+    setRunning(true);
+    const BST = new BinarySearchTree();
+    for (var i = 0; i < n; i++) {
+      BST.insert(Math.ceil(Math.random() * 100));
+      await timer(500);
+      setOutput(structuredClone(BST));
+    }
+    setRunning(false);
+    setOutput(structuredClone(BST));
+  };
+
+  // const handleDelete = (e) => {
+  //   e.preventDefault();
+  // };
 
   const handleFork = () => {
     const svgEl = svgRef.current;
@@ -48,18 +63,6 @@ const BSTViz = () => {
     alert("BST.svg forked");
   };
 
-  const runBuildTree = async (n) => {
-    setRunning(true);
-    const BST = new BinarySearchTree();
-    for (var i = 0; i < n; i++) {
-      BST.insert(Math.ceil(Math.random() * 100));
-      await timer(500);
-      setOutput(Object.assign({}, BST));
-    }
-    setRunning(false);
-    setOutput(Object.assign({}, BST));
-  };
-
   useEffect(() => {
     const height = 960;
     const width = containerRef.current.clientWidth;
@@ -68,7 +71,7 @@ const BSTViz = () => {
 
     const links = treeLayout(root).links();
     const svg = d3.select("#BSTViz");
-    console.log(root.descendants().pop().depth);
+
     svg
       .attr("width", width)
       .style("height", height)
@@ -91,7 +94,7 @@ const BSTViz = () => {
       .transition()
       .duration(50)
       .attr("x", (d) => d.x)
-      .attr("y", (d) => d.y + 48)
+      .attr("y", (d) => d.y + yOffSet)
       .attr("text-anchor", "middle")
       .attr("alignment-baseline", "middle")
       .text((d) => d.data.data)
@@ -110,7 +113,7 @@ const BSTViz = () => {
           }
         </span>
         <input
-          onChange={handleOnChange}
+          onChange={(e) => setNumber(e.target.value)}
           placeholder="between 3 and 100"
           style={{ textAlign: "center" }}
         />
@@ -123,6 +126,21 @@ const BSTViz = () => {
           </button>
         </div>
       </form>
+      {/* <form onSubmit={handleDelete}>
+        <span style={{ fontSize: "1rem" }}>
+          {"Please enter node you want to delete "}
+        </span>
+        <input
+          onChange={(e) => setDelNode(e.target.value)}
+          style={{ textAlign: "center" }}
+        />
+        <div>
+          <button style={{ margin: "1rem 0" }} disabled={running}>
+            DELETE
+          </button>
+        </div>
+      </form> */}
+
       <div
         ref={containerRef}
         style={{

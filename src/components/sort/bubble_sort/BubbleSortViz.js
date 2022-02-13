@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../sort.scss";
+import SortVizMain from "../SortVizMain";
 
 const BubbleSortViz = () => {
   const [number, setNumber] = useState(0);
@@ -43,40 +43,16 @@ const BubbleSortViz = () => {
   };
 
   return (
-    <div className="container">
-      <h1>Bubble Sorting Algorithm O(n^2)</h1>
-      <form onSubmit={handleRun}>
-        <span style={{ fontSize: "1rem" }}>
-          {"Please enter the length of array "}
-        </span>
-        <input onChange={handleOnChange} />
-        <div>
-          <button style={{ margin: "1rem 0" }} disabled={running}>
-            RUN
-          </button>
-        </div>
-      </form>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          height: "50vh",
-          border: "1px solid black",
-        }}
-      >
-        {output.map((num, i) => (
-          <div
-            key={i}
-            style={{
-              backgroundColor: "gray",
-              outline: "1px solid black",
-              width: `${(1 / output.length) * 100}%`,
-              height: `${(num / Math.max(...output)) * 100}%`,
-            }}
-          />
-        ))}
-      </div>
-    </div>
+    <SortVizMain
+      title="Bubble Sorting Algorithm"
+      instruction="Please enter the length of array "
+      output={output}
+      handleRun={handleRun}
+      handleOnChange={handleOnChange}
+      running={running}
+      number={number}
+      maxLength={200}
+    />
   );
 };
 
