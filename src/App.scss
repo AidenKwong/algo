@@ -1,8 +1,22 @@
+$blue: #3d405b;
+$lightBrown: #f4f1de;
+
 .App {
 }
 
 a {
   text-decoration: none;
+}
+
+.vizCodeMain {
+  border: 0.25em solid $blue;
+  padding: 0 1rem;
+  background-color: $lightBrown;
+  flex: 1;
+}
+
+.code {
+  font-family: "Inconsolata", monospace;
 }
 
 .pageNav {
@@ -23,4 +37,5 @@ a {
   height: 50vh;
   border: 0.25em solid black;
   padding: 0.25em 0;
+  width: 60%;
 }

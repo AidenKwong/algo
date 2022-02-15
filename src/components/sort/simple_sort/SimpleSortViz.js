@@ -1,6 +1,19 @@
 import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
+const code = `const simpleSort = (array) => {
+  for (var i = 0; i < array.length; i++) {
+  for (var j = 0; j < array.length; j++) {
+    if (array[j] > array[j + 1]) {
+      var temp = array[j];
+      array[j] = array[j + 1];
+      array[j + 1] = temp;
+    }
+  }
+}
+return array;
+}`
+
 const SimpleSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
@@ -44,7 +57,7 @@ const SimpleSortViz = () => {
 
   return (
     <SortVizMain
-      title="Simeple Sorting Algorithm"
+      title="Simeple Sort Algorithm"
       instruction="Please enter the length of array "
       output={output}
       handleRun={handleRun}
@@ -52,6 +65,7 @@ const SimpleSortViz = () => {
       running={running}
       number={number}
       maxLength={200}
+      code={code}
     />
   );
 };

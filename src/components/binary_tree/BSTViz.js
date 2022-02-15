@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
+
+
+
 const yOffSet = 36;
+
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BSTTemplate = () => {
@@ -57,7 +61,7 @@ const BSTViz = () => {
   };
 
   useEffect(() => {
-    const height = 960;
+    const height = window.innerHeight * 0.9;
     const width = containerRef.current.clientWidth;
     const root = d3.hierarchy(output.root);
     const treeLayout = d3.tree().size([width, height]);
