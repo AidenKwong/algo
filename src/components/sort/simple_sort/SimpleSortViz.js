@@ -12,7 +12,7 @@ const code = `const simpleSort = (array) => {
   }
 }
 return array;
-}`
+}`;
 
 const SimpleSortViz = () => {
   const [number, setNumber] = useState(0);
@@ -38,8 +38,8 @@ const SimpleSortViz = () => {
 
     const sortedArr = [...array];
     const send = async () => {
-      for (let i = 0; i < n; i++) {
-        for (let j = i + 1; j < n; j++) {
+      for (var i = 0; i < n; i++) {
+        for (var j = i + 1; j < n; j++) {
           if (sortedArr[i] > sortedArr[j]) {
             var tmp = sortedArr[i];
             sortedArr[i] = sortedArr[j];
@@ -57,7 +57,7 @@ const SimpleSortViz = () => {
 
   return (
     <SortVizMain
-      title="Simeple Sort Algorithm"
+      title="Simeple Sort"
       instruction="Please enter the length of array "
       output={output}
       handleRun={handleRun}

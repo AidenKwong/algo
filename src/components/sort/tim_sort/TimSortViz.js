@@ -17,7 +17,7 @@ const code = `const timSort = (arr) => {
     }
   }
   return arr;
-};`
+};`;
 
 var MIN_MERGE = 32;
 
@@ -135,7 +135,7 @@ const TimSortViz = () => {
 
   return (
     <SortVizMain
-      title="Tim Sorting Algorithm"
+      title="Tim Sort"
       instruction="Please enter the length of array  "
       output={output}
       handleRun={handleRun}

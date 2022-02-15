@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
+const code = `const insertionSort = (array) => {
+  for (var i = 1; i < n; i++) {
+    var current = array[i];
+
+    var j = i - 1;
+    while (j > -1 && current < array[j]) {
+      array[j + 1] = array[j];
+      j--;
+    }
+    array[j + 1] = current;
+  }
+  return array;
+};
+`;
+
 const InsertionSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
@@ -25,10 +40,10 @@ const InsertionSortViz = () => {
 
     const sortedArr = [...array];
     const send = async () => {
-      for (let i = 1; i < n; i++) {
-        let current = sortedArr[i];
+      for (var i = 1; i < n; i++) {
+        var current = sortedArr[i];
 
-        let j = i - 1;
+        var j = i - 1;
         while (j > -1 && current < sortedArr[j]) {
           sortedArr[j + 1] = sortedArr[j];
           setOutput([...sortedArr]);
@@ -44,7 +59,7 @@ const InsertionSortViz = () => {
 
   return (
     <SortVizMain
-      title="Insertion Sorting Algorithm"
+      title="Insertion Sort"
       instruction="Please enter the length of array "
       output={output}
       handleRun={handleRun}
@@ -52,6 +67,7 @@ const InsertionSortViz = () => {
       running={running}
       number={number}
       maxLength={1000}
+      code={code}
     />
   );
 };
