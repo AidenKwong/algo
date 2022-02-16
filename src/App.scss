@@ -13,6 +13,7 @@ input {
   font-family: "Inconsolata", monospace;
   font-size: 1rem;
   background-color: $lightBrown;
+  height: 2rem;
 }
 
 .pageNav {
@@ -22,6 +23,20 @@ input {
   gap: 2rem;
 }
 
-.vizMain {
-  margin: 2rem;
+.page {
+  padding: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .page {
+    padding: 0;
+  }
+
+  h1,
+  h3,
+  p,
+  button,
+  input {
+    margin: 1rem 0 1rem 0.5rem;
+  }
 }

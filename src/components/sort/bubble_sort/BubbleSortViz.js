@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
 const code = `const bubbleSort = (array) => {
-  for (var i = array.length; i >= 0; i--) {
-    for (var j = array.length; j >= 0; j--) {
-      if (array[i] > array[j - 1]) {
-        var tmp = array[i];
-        array[i] = array[j - 1];
-        array[j - 1] = tmp;
-
-      }
-    }
-  }
-  return array;
+	var swapped = true;
+	do {
+		swapped = false;
+		for (var j = 0; j < array.length; j++) {
+			if (array[j] > array[j + 1]) {
+				var temp = array[j];
+				array[j] = array[j + 1];
+				array[j + 1] = temp;
+				swapped = true;
+			}
+		}
+	} while (swapped);
+	return array;
 };
 `;
 
@@ -40,21 +42,25 @@ const BubbleSortViz = () => {
 
     const sortedArr = [...array];
     const send = async () => {
-      for (var i = n; i >= 0; i--) {
-        for (var j = n; j >= 0; j--) {
-          if (sortedArr[i] > sortedArr[j - 1]) {
-            var tmp = sortedArr[i];
-            sortedArr[i] = sortedArr[j - 1];
-            sortedArr[j - 1] = tmp;
-            setOutput([...sortedArr]);
-            await timer();
+      var swapped = true;
+      do {
+        swapped = false;
+        for (var i = n; i >= 0; i--) {
+          if (sortedArr[i] > sortedArr[i + 1]) {
+            var temp = sortedArr[i];
+            sortedArr[i] = sortedArr[i + 1];
+            sortedArr[i + 1] = temp;
+            swapped = true;
           }
+          setOutput([...sortedArr]);
+          await timer(1);
         }
-      }
+      } while (swapped);
 
-      return setRunning(false);
+      setRunning(false);
     };
     send();
+    setOutput([...sortedArr]);
   };
 
   return (

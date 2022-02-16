@@ -49,6 +49,8 @@ const SelectionSortViz = () => {
         for (var j = i + 1; j < n; j++) {
           if (sortedArr[j] < sortedArr[min]) {
             min = j;
+            setOutput([...sortedArr]);
+            await timer(10);
           }
         }
 
@@ -56,8 +58,6 @@ const SelectionSortViz = () => {
           var tmp = sortedArr[i];
           sortedArr[i] = sortedArr[min];
           sortedArr[min] = tmp;
-          setOutput([...sortedArr]);
-          await timer(10);
         }
       }
       return setRunning(false);
