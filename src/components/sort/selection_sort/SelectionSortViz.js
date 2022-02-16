@@ -1,6 +1,24 @@
 import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
+const code = `const selectionSort = (array) => {
+  for (var i = 0; i < array.length; i++) {
+    var min = i;
+    for (var j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j;
+      }
+    }
+
+    if (min !== i) {
+      var tmp = array[i];
+      array[i] = array[min];
+      array[min] = tmp;
+    }
+  }
+  return array;
+};`;
+
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const SelectionSortViz = () => {
@@ -26,9 +44,9 @@ const SelectionSortViz = () => {
     const sortedArr = [...array];
 
     const send = async () => {
-      for (let i = 0; i < n; i++) {
+      for (var i = 0; i < n; i++) {
         var min = i;
-        for (let j = i + 1; j < n; j++) {
+        for (var j = i + 1; j < n; j++) {
           if (sortedArr[j] < sortedArr[min]) {
             min = j;
           }
@@ -49,7 +67,7 @@ const SelectionSortViz = () => {
 
   return (
     <SortVizMain
-      title="Selection Sorting Algorithm"
+      title="Selection Sort"
       instruction="Please enter the length of array "
       output={output}
       handleRun={handleRun}
@@ -57,6 +75,7 @@ const SelectionSortViz = () => {
       running={running}
       number={number}
       maxLength={1000}
+      code={code}
     />
   );
 };

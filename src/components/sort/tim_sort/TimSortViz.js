@@ -1,18 +1,36 @@
 import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
+const code = `const timSort = (arr) => {
+  var n = arr.length;
+  var minRun = minRunLength(MIN_MERGE);
+
+  for (var i = 0; i < n; i += minRun) {
+    insertionSort(arr, i, Math.min(i + MIN_MERGE - 1, n - 1));
+  }
+
+  for (var size = minRun; size < n; size = 2 * size) {
+    for (var left = 0; left < n; left += 2 * size) {
+      var mid = left + size - 1;
+      var right = Math.min(left + 2 * size - 1, n - 1);
+      if (mid < right) merge(arr, left, mid, right);
+    }
+  }
+  return arr;
+};`;
+
 var MIN_MERGE = 32;
 
-function minRunLength(n) {
+const minRunLength = (n) => {
   var r = 0;
   while (n >= MIN_MERGE) {
     r |= n & 1;
     n >>= 1;
   }
   return n + r;
-}
+};
 
-function insertionSort(arr, left, right) {
+const insertionSort = (arr, left, right) => {
   for (var i = left + 1; i <= right; i++) {
     var temp = arr[i];
     var j = i - 1;
@@ -23,9 +41,9 @@ function insertionSort(arr, left, right) {
     }
     arr[j + 1] = temp;
   }
-}
+};
 
-function merge(arr, l, m, r) {
+const merge = (arr, l, m, r) => {
   var len1 = m - l + 1,
     len2 = r - m;
   var left = new Array(len1);
@@ -63,7 +81,7 @@ function merge(arr, l, m, r) {
     k++;
     j++;
   }
-}
+};
 
 const TimSortViz = () => {
   const [number, setNumber] = useState(0);
@@ -80,7 +98,7 @@ const TimSortViz = () => {
     Simple_Sorting_Algo(number);
   };
 
-  async function timSort(arr) {
+  const timSort = async (arr) => {
     var n = arr.length;
     var minRun = minRunLength(MIN_MERGE);
 
@@ -102,7 +120,7 @@ const TimSortViz = () => {
     }
     setOutput([...arr]);
     return setRunning(false);
-  }
+  };
 
   const Simple_Sorting_Algo = (n) => {
     setRunning(true);
@@ -117,7 +135,7 @@ const TimSortViz = () => {
 
   return (
     <SortVizMain
-      title="Tim Sorting Algorithm"
+      title="Tim Sort"
       instruction="Please enter the length of array  "
       output={output}
       handleRun={handleRun}
@@ -125,6 +143,7 @@ const TimSortViz = () => {
       running={running}
       number={number}
       maxLength={5000}
+      code={code}
     />
   );
 };

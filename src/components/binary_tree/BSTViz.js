@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
+
 const yOffSet = 36;
+
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BSTTemplate = () => {
@@ -44,8 +46,6 @@ const BSTViz = () => {
   };
 
   const handleFork = () => {
-    const svgEl = svgRef.current;
-    svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     var svgData = svgRef.current.outerHTML;
     var preface = '<?xml version="1.0" standalone="no"?>\r\n';
     var svgBlob = new Blob([preface, svgData], {
@@ -57,7 +57,7 @@ const BSTViz = () => {
   };
 
   useEffect(() => {
-    const height = 960;
+    const height = containerRef.current.clientHeight;
     const width = containerRef.current.clientWidth;
     const root = d3.hierarchy(output.root);
     const treeLayout = d3.tree().size([width, height]);
@@ -94,6 +94,10 @@ const BSTViz = () => {
       .style("display", (d) => (d.data.data === 0 ? "none" : "block"))
       .style("text-shadow", "-1px -1px 3px white")
       .style("user-select", "none");
+
+    const svgEl = svgRef.current;
+    svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+    svgEl.setAttribute("viewBox", `0 0 ${width} ${height}`);
   }, [output]);
 
   return (

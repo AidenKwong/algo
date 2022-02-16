@@ -1,3 +1,5 @@
+@import "variables";
+
 .App {
 }
 
@@ -14,13 +16,4 @@ a {
 
 .vizMain {
   margin: 2rem;
-}
-
-.vizContainer {
-  display: flex;
-  justify-content: center;
-  background-color: #81b29a;
-  height: 50vh;
-  border: 0.25em solid black;
-  padding: 0.25em 0;
 }

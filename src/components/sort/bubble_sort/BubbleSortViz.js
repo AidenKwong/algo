@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import SortVizMain from "../SortVizMain";
 
+const code = `const bubbleSort = (array) => {
+  for (var i = array.length; i >= 0; i--) {
+    for (var j = array.length; j >= 0; j--) {
+      if (array[i] > array[j - 1]) {
+        var tmp = array[i];
+        array[i] = array[j - 1];
+        array[j - 1] = tmp;
+
+      }
+    }
+  }
+  return array;
+};
+`;
+
 const BubbleSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
@@ -25,8 +40,8 @@ const BubbleSortViz = () => {
 
     const sortedArr = [...array];
     const send = async () => {
-      for (let i = n; i >= 0; i--) {
-        for (let j = n; j >= 0; j--) {
+      for (var i = n; i >= 0; i--) {
+        for (var j = n; j >= 0; j--) {
           if (sortedArr[i] > sortedArr[j - 1]) {
             var tmp = sortedArr[i];
             sortedArr[i] = sortedArr[j - 1];
@@ -44,7 +59,7 @@ const BubbleSortViz = () => {
 
   return (
     <SortVizMain
-      title="Bubble Sorting Algorithm"
+      title="Bubble Sort"
       instruction="Please enter the length of array "
       output={output}
       handleRun={handleRun}
@@ -52,6 +67,7 @@ const BubbleSortViz = () => {
       running={running}
       number={number}
       maxLength={200}
+      code={code}
     />
   );
 };

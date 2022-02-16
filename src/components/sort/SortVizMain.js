@@ -1,5 +1,6 @@
 import React from "react";
-
+import "./SortVizMain.scss";
+import PrismCode from "./PrismCode";
 const SortVizMain = ({
   title,
   instruction,
@@ -9,6 +10,7 @@ const SortVizMain = ({
   running,
   number,
   maxLength,
+  code,
 }) => {
   return (
     <div className="vizMain">
@@ -31,18 +33,28 @@ const SortVizMain = ({
           </button>
         </div>
       </form>
-      <div className="vizContainer">
-        {output.map((num, i) => (
-          <div
-            key={i}
-            style={{
-              backgroundColor: "#3d405b",
-              marginLeft: `${output.length <= 400 ? "1px" : "none"}`,
-              width: `${(1 / output.length) * 100}%`,
-              height: `${(num / Math.max(...output)) * 100}%`,
-            }}
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+        <div className="vizContainer">
+          {output.map((num, i) => (
+            <div
+              key={i}
+              style={{
+                backgroundColor: "#3d405b",
+                marginLeft: `${output.length <= 400 ? "1px" : "none"}`,
+                width: `${(1 / output.length) * 100}%`,
+                height: `${(num / Math.max(...output)) * 100}%`,
+              }}
+            />
+          ))}
+        </div>
+        <div className="vizCodeMain">
+          <h3>JS</h3>
+          <PrismCode
+            style={{ overflow: "scroll" }}
+            code={code}
+            language={"javascript"}
           />
-        ))}
+        </div>
       </div>
     </div>
   );
