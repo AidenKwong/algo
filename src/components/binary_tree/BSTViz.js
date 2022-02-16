@@ -37,10 +37,10 @@ const BSTViz = () => {
     for (var i = 0; i < n; i++) {
       BST.insert(Math.ceil(Math.random() * 100));
       await timer(500);
-      setOutput(structuredClone(BST));
+      setOutput({ ...BST });
     }
     setRunning(false);
-    setOutput(structuredClone(BST));
+    setOutput({ ...BST });
   };
 
   const handleFork = () => {
