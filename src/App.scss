@@ -7,6 +7,14 @@ a {
   text-decoration: none;
 }
 
+input {
+  all: unset;
+  border: 0.2em solid $blue;
+  font-family: "Inconsolata", monospace;
+  font-size: 1rem;
+  background-color: $lightBrown;
+}
+
 .pageNav {
   display: flex;
   justify-content: center;

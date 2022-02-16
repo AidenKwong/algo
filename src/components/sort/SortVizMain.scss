@@ -3,9 +3,9 @@
 .vizContainer {
   display: flex;
   justify-content: center;
-  background-color: #81b29a;
+  background-color: $green;
   height: 50vh;
-  border: 0.25em solid black;
+  border: 0.25em solid $blue;
   padding: 0.25em 0;
   flex: 1;
 }

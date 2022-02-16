@@ -16,14 +16,17 @@ const SortVizMain = ({
     <div className="vizMain">
       <h1>{title}</h1>
       <form onSubmit={handleRun}>
-        <span style={{ fontSize: "1rem" }}>
-          {instruction + ` ( < ${maxLength} )`}
-        </span>
-        <input
-          onChange={handleOnChange}
-          placeholder={`< ${maxLength}`}
-          style={{ textAlign: "center" }}
-        />
+        <div style={{ display: "flex", gap: "1rem" }}>
+          <span style={{ fontSize: "1rem" }}>
+            {instruction + ` ( < ${maxLength} )`}
+          </span>
+          <input
+            onChange={handleOnChange}
+            placeholder={`< ${maxLength}`}
+            style={{ textAlign: "center" }}
+          />
+        </div>
+
         <div>
           <button
             style={{ margin: "1rem 0" }}

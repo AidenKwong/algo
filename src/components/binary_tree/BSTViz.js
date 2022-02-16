@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
+import "./BSTViz.scss";
 
 const yOffSet = 36;
 
@@ -65,10 +66,7 @@ const BSTViz = () => {
     const links = treeLayout(root).links();
     const svg = d3.select("#BSTViz");
 
-    svg
-      .attr("width", width)
-      .style("height", height)
-      .style("border", "1px solid black");
+    svg.attr("width", width).style("height", height);
 
     svg
       .selectAll("path")
@@ -78,7 +76,8 @@ const BSTViz = () => {
       .duration(50)
       .attr("d", myLink)
       .attr("fill", "none")
-      .attr("stroke", (d) => (d.target.data.data ? "black" : "none"));
+      .attr("stroke", (d) => (d.target.data.data ? "#3d405b" : "none"))
+      .attr("stroke-width", ".1em");
 
     svg
       .selectAll("text")
@@ -92,8 +91,9 @@ const BSTViz = () => {
       .attr("alignment-baseline", "middle")
       .text((d) => d.data.data)
       .style("display", (d) => (d.data.data === 0 ? "none" : "block"))
-      .style("text-shadow", "-1px -1px 3px white")
-      .style("user-select", "none");
+      .style("user-select", "none")
+      .attr("fill", "#3d405b")
+      .style("font-weight", "600");
 
     const svgEl = svgRef.current;
     svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -125,9 +125,8 @@ const BSTViz = () => {
       </form>
       <div
         ref={containerRef}
+        className="vizContainer"
         style={{
-          display: "flex",
-          justifyContent: "center",
           height: 960,
         }}
       >
