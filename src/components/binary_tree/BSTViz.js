@@ -101,27 +101,22 @@ const BSTViz = () => {
   }, [output]);
 
   return (
-    <div style={{ padding: "2rem" }}>
+    <div>
       <h1>Binary Search Tree</h1>
       <form onSubmit={handleRun}>
-        <span style={{ fontSize: "1rem" }}>
+        <p style={{ fontSize: "1rem" }}>
           {
             "Please enter the number of nodes you want to insert in the Binary Search Tree "
           }
-        </span>
+        </p>
         <input
           onChange={(e) => setNumber(e.target.value)}
           placeholder="between 3 and 100"
           style={{ textAlign: "center" }}
         />
-        <div>
-          <button
-            style={{ margin: "1rem 0" }}
-            disabled={(number > 100) | (number < 3) | running}
-          >
-            BUILD
-          </button>
-        </div>
+        <button disabled={(number > 100) | (number < 3) | running}>
+          BUILD
+        </button>
       </form>
       <div
         ref={containerRef}

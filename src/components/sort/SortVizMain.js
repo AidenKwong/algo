@@ -31,9 +31,6 @@ const SortVizMain = ({
             placeholder={`< ${maxLength}`}
             style={{ textAlign: "center" }}
           />
-        </div>
-
-        <div>
           <button disabled={running | (number > maxLength)}>RUN</button>
         </div>
       </form>

@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import "./App.scss";
-import BSTViz from "./components/binary_tree/BSTViz";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
 import SortPage from "./pages/SortPage";
 import { css } from "@emotion/react";
+import TreePage from "./pages/TreePage";
 
 const App = () => {
   var location = useLocation();
@@ -57,7 +57,7 @@ const App = () => {
         </div>
       </div>
       <Routes>
-        <Route path="/" element={<BSTViz />} />
+        <Route path="/" element={<TreePage />} />
         <Route path="/sort" element={<SortPage />} />
       </Routes>
     </div>

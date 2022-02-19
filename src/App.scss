@@ -10,10 +10,31 @@ a {
 input {
   all: unset;
   border: 0.2em solid $blue;
-  font-family: "Inconsolata", monospace;
   font-size: 1rem;
   background-color: $lightBrown;
+  font-family: "Inconsolata", monospace;
   height: 2rem;
+  margin: 0.25em 0;
+}
+
+button {
+  padding: 0 1em;
+  border-radius: 0.5em;
+  border: 0.2em solid $blue;
+  font-size: 1rem;
+  background-color: $green;
+  font-family: "Inconsolata", monospace;
+  height: 2rem;
+  margin: 0.25em;
+}
+
+button:enabled {
+  cursor: pointer;
+}
+
+button:disabled {
+  border-color: gray;
+  background-color: lightgray;
 }
 
 .pageNav {
