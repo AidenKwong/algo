@@ -21,6 +21,7 @@ button {
   padding: 0 1em;
   border-radius: 0.5em;
   border: 0.2em solid $blue;
+  color: $blue;
   font-size: 1rem;
   background-color: $green;
   font-family: "Inconsolata", monospace;
@@ -28,8 +29,9 @@ button {
   margin: 0.25em;
 }
 
-button:enabled {
+button:enabled:hover {
   cursor: pointer;
+  background-color: $dimGreen;
 }
 
 button:disabled {
