@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
 import "./BSTViz.scss";
+import { saveSvgAsPng } from "save-svg-as-png";
 
 const yOffSet = 36;
 
@@ -10,7 +11,7 @@ const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 const BSTTemplate = () => {
   const BST = new BinarySearchTree();
   for (var i = 0; i < 5; i++) {
-    BST.insert(`example: ${Math.ceil(Math.random() * 10)}`);
+    BST.insert(Math.ceil(Math.random() * 10));
   }
   return BST;
 };
@@ -25,7 +26,7 @@ const BSTViz = () => {
   const [number, setNumber] = useState(0);
   const [output, setOutput] = useState(BSTTemplate);
   const [running, setRunning] = useState(false);
-  const [downloadURL, setDownloadURL] = useState("#");
+  const [containerWidth, setContainerWidth] = useState(null);
   const containerRef = useRef();
   const svgRef = useRef();
 
@@ -46,58 +47,65 @@ const BSTViz = () => {
     setOutput({ ...BST });
   };
 
-  const handleFork = () => {
-    var svgData = svgRef.current.outerHTML;
-    var preface = '<?xml version="1.0" standalone="no"?>\r\n';
-    var svgBlob = new Blob([preface, svgData], {
-      type: "image/svg+xml;charset=utf-8",
-    });
-    var svgUrl = URL.createObjectURL(svgBlob);
-    setDownloadURL(svgUrl);
-    alert("BST.svg forked");
-  };
-
   useEffect(() => {
     const height = containerRef.current.clientHeight;
     const width = containerRef.current.clientWidth;
+
+    setContainerWidth(width);
+
     const root = d3.hierarchy(output.root);
     const treeLayout = d3.tree().size([width, height]);
 
     const links = treeLayout(root).links();
     const svg = d3.select("#BSTViz");
 
-    svg.attr("width", width).style("height", height);
-
     svg
+      .attr("width", width)
+      .attr("height", height)
+      .attr("xmlns", "http://www.w3.org/2000/svg")
+      .attr("viewBox", `0 0 ${width} ${height}`);
+
+    svg.append("g").attr("id", "links");
+    svg.append("g").attr("id", "nodes");
+    svg
+      .select("#links")
       .selectAll("path")
       .data(links)
       .join("path")
-      .transition()
-      .duration(50)
       .attr("d", myLink)
       .attr("fill", "none")
       .attr("stroke", (d) => (d.target.data.data ? "#3d405b" : "none"))
-      .attr("stroke-width", ".1em");
+      .attr("stroke-width", ".2em");
+
+    svg
+      .select("#nodes")
+      .selectAll("circle")
+      .data(root.descendants())
+      .join("circle")
+      .attr("r", "1rem")
+      .attr("cx", (d) => d.x)
+      .attr("cy", (d) => d.y + yOffSet)
+      .attr("stroke", "#3d405b")
+      .attr("stroke-width", "0.2em")
+      .text((d) => d.data.data)
+      .style("display", (d) =>
+        d.data.data === 0 || d.data === 0 ? "none" : "block"
+      )
+      .attr("fill", "white");
 
     svg
       .selectAll("text")
       .data(root.descendants())
       .join("text")
-      .transition()
-      .duration(50)
       .attr("x", (d) => d.x)
       .attr("y", (d) => d.y + yOffSet)
       .attr("text-anchor", "middle")
-      .attr("alignment-baseline", "middle")
+      .attr("alignment-baseline", "central")
       .text((d) => d.data.data)
       .style("display", (d) => (d.data.data === 0 ? "none" : "block"))
       .style("user-select", "none")
       .attr("fill", "#3d405b")
       .style("font-weight", "600");
-
-    const svgEl = svgRef.current;
-    svgEl.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    svgEl.setAttribute("viewBox", `0 0 ${width} ${height}`);
   }, [output]);
 
   return (
@@ -111,10 +119,19 @@ const BSTViz = () => {
         </p>
         <input
           onChange={(e) => setNumber(e.target.value)}
-          placeholder="between 3 and 100"
+          placeholder={
+            containerWidth < 500 ? "between 3 and 30" : "between 3 and 100"
+          }
           style={{ textAlign: "center" }}
         />
-        <button disabled={(number > 100) | (number < 3) | running}>
+        <button
+          disabled={
+            (number > 100) |
+            (number < 3) |
+            running |
+            ((containerWidth < 500) & (number > 30))
+          }
+        >
           BUILD
         </button>
       </form>
@@ -127,18 +144,13 @@ const BSTViz = () => {
       >
         <svg id="BSTViz" ref={svgRef} />
       </div>
-      <span>{"Fork to save current BST image:"}</span>
-
+      <span>{"Download current BST image:"}</span>
       <button
-        style={{ margin: "1rem" }}
-        onClick={handleFork}
         disabled={running}
+        onClick={() => saveSvgAsPng(svgRef.current, "BST.png")}
       >
-        Fork
+        Download
       </button>
-      <a style={{ margin: "1rem" }} href={downloadURL} download="BST.svg">
-        Click here to download
-      </a>
     </div>
   );
 };

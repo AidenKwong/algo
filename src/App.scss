@@ -50,6 +50,16 @@ button:disabled {
   padding: 2rem;
 }
 
+.vizContainer {
+  display: flex;
+  justify-content: center;
+  background-color: $green;
+  height: 50vh;
+  border: 0.25em solid $blue;
+  padding: 0.25em 0;
+  flex: 1;
+}
+
 @media only screen and (max-width: 600px) {
   .page {
     padding: 0;
