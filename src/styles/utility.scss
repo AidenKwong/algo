@@ -1,0 +1,55 @@
+.BUILDING {
+  position: relative;
+  width: 4.5rem;
+}
+
+.BUILDING::before {
+  content: "BUILDING";
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  animation: building 1s infinite;
+}
+
+@keyframes building {
+  25% {
+    content: "BUILDING.";
+  }
+  50% {
+    content: "BUILDING..";
+  }
+  75% {
+    content: "BUILDING...";
+  }
+  100% {
+    content: "BUILDING";
+  }
+}
+
+.SORTING {
+  position: relative;
+  width: 4.5rem;
+}
+
+.SORTING::before {
+  content: "SORTING";
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  animation: sorting 1s infinite;
+}
+
+@keyframes sorting {
+  25% {
+    content: "SORTING.";
+  }
+  50% {
+    content: "SORTING..";
+  }
+  75% {
+    content: "SORTING...";
+  }
+  100% {
+    content: "SORTING";
+  }
+}

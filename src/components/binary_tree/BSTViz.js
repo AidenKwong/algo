@@ -112,28 +112,36 @@ const BSTViz = () => {
     <div>
       <h1>Binary Search Tree</h1>
       <form onSubmit={handleRun}>
-        <p style={{ fontSize: "1rem" }}>
-          {
-            "Please enter the number of nodes you want to insert in the Binary Search Tree "
-          }
-        </p>
-        <input
-          onChange={(e) => setNumber(e.target.value)}
-          placeholder={
-            containerWidth < 500 ? "between 3 and 30" : "between 3 and 100"
-          }
-          style={{ textAlign: "center" }}
-        />
-        <button
-          disabled={
-            (number > 100) |
-            (number < 3) |
-            running |
-            ((containerWidth < 500) & (number > 30))
-          }
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+          }}
         >
-          BUILD
-        </button>
+          <p style={{ fontSize: "1rem" }}>
+            {
+              "Please enter the number of nodes you want to insert in the Binary Search Tree "
+            }
+          </p>
+          <input
+            onChange={(e) => setNumber(e.target.value)}
+            placeholder={
+              containerWidth < 500 ? "between 3 and 30" : "between 3 and 100"
+            }
+            style={{ textAlign: "center" }}
+          />
+          <button
+            disabled={
+              (number > 100) |
+              (number < 3) |
+              running |
+              ((containerWidth < 500) & (number > 30))
+            }
+          >
+            {running ? <div className="BUILDING" /> : "BUILD"}
+          </button>
+        </div>
       </form>
       <div
         ref={containerRef}
@@ -144,13 +152,22 @@ const BSTViz = () => {
       >
         <svg id="BSTViz" ref={svgRef} />
       </div>
-      <span>{"Download current BST image:"}</span>
-      <button
-        disabled={running}
-        onClick={() => saveSvgAsPng(svgRef.current, "BST.png")}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+        }}
       >
-        Download
-      </button>
+        {" "}
+        <span>{"Download current BST image:"}</span>
+        <button
+          disabled={running}
+          onClick={() => saveSvgAsPng(svgRef.current, "BST.png")}
+        >
+          {running ? <div className="BUILDING" /> : "Download"}
+        </button>
+      </div>
     </div>
   );
 };

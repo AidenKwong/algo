@@ -31,7 +31,9 @@ const SortVizMain = ({
             placeholder={`< ${maxLength}`}
             style={{ textAlign: "center" }}
           />
-          <button disabled={running | (number > maxLength)}>RUN</button>
+          <button disabled={running | (number > maxLength)}>
+            {running ? <div className="SORTING" /> : "SORT"}
+          </button>
         </div>
       </form>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>

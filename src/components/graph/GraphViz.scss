@@ -1,5 +1,8 @@
 @import "../../styles/variables";
 
 .vizContainer {
+  background-color: $green;
+  height: 100vh;
   border: 0.25em solid $blue;
+  padding: 0.25em 0;
 }
