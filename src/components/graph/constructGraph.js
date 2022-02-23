@@ -1,22 +1,16 @@
-import * as echarts from "echarts";
-import { SVGRenderer, CanvasRenderer } from "echarts/renderers";
-
-const constructGraph = (domEl, n, setRunning) => {
-  echarts.use([SVGRenderer, CanvasRenderer]);
-  var myChart = echarts.init(domEl, null, { renderer: "svg" });
-
+const constructGraph = (myChart, n, setRunning, setEChartOption) => {
   const data = [
     {
       fixed: false,
       x: myChart.getWidth() / 2,
       y: myChart.getHeight() / 2,
       symbolSize: 32,
-      name: "-1",
+      name: "0",
     },
   ];
 
   const edges = [];
-  const option = {
+  var option = {
     series: [
       {
         type: "graph",
@@ -28,7 +22,7 @@ const constructGraph = (domEl, n, setRunning) => {
         lineStyle: {
           color: "#3d405b",
           width: 3,
-          opacity: 1,
+          opacity: 0.75,
         },
         itemStyle: {
           borderColor: "#3d405b",
@@ -40,13 +34,13 @@ const constructGraph = (domEl, n, setRunning) => {
           fontSize: 16,
           fontWeight: 600,
         },
-        animation: false,
+        animation: true,
         data: data,
         force: {
           initLayout: "circular",
           repulsion: 300,
-          edgeLength: 64,
-          friction: 0.3,
+          edgeLength: 96,
+          gravity: 0.1,
         },
         edges: edges,
       },
@@ -79,8 +73,9 @@ const constructGraph = (domEl, n, setRunning) => {
     if (data.length > n) {
       clearInterval(myInterval);
       setRunning(false);
+      setEChartOption(option);
     }
-  }, 500);
+  }, 50);
 
   option && myChart.setOption(option);
 };

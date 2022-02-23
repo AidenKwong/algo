@@ -1,3 +1,31 @@
+.RUNNING {
+  position: relative;
+  width: 4.5rem;
+}
+
+.RUNNING::before {
+  content: "RUNNING";
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  animation: RUN_ 1s infinite;
+}
+
+@keyframes RUN_ {
+  25% {
+    content: "RUNNING.";
+  }
+  50% {
+    content: "RUNNING..";
+  }
+  75% {
+    content: "RUNNING...";
+  }
+  100% {
+    content: "RUNNING";
+  }
+}
+
 .BUILDING {
   position: relative;
   width: 4.5rem;
@@ -51,5 +79,32 @@
   }
   100% {
     content: "SORTING";
+  }
+}
+.SEARCHING {
+  position: relative;
+  width: 4.5rem;
+}
+
+.SEARCHING::before {
+  content: "SEARCHING";
+  position: absolute;
+  top: -0.5em;
+  left: -0.5em;
+  animation: searching 1s infinite;
+}
+
+@keyframes searching {
+  25% {
+    content: "SEARCHING.";
+  }
+  50% {
+    content: "SEARCHING..";
+  }
+  75% {
+    content: "SEARCHING...";
+  }
+  100% {
+    content: "SEARCHING";
   }
 }

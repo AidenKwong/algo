@@ -21,19 +21,28 @@ const SortVizMain = ({
             display: "flex",
             alignItems: "center",
             gap: "1rem",
+            flexWrap: "wrap",
           }}
         >
           <p style={{ fontSize: "1rem" }}>
             {instruction + ` ( < ${maxLength} )`}
           </p>
-          <input
-            onChange={handleOnChange}
-            placeholder={`< ${maxLength}`}
-            style={{ textAlign: "center" }}
-          />
-          <button disabled={running | (number > maxLength)}>
-            {running ? <div className="SORTING" /> : "SORT"}
-          </button>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <input
+              onChange={handleOnChange}
+              placeholder={`< ${maxLength}`}
+              style={{ textAlign: "center" }}
+            />
+            <button disabled={running | (number > maxLength)}>
+              {running ? <div className="SORTING" /> : "SORT"}
+            </button>
+          </div>
         </div>
       </form>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>

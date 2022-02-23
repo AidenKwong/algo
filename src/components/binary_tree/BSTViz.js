@@ -117,6 +117,7 @@ const BSTViz = () => {
             display: "flex",
             alignItems: "center",
             gap: "1rem",
+            flexWrap: "wrap",
           }}
         >
           <p style={{ fontSize: "1rem" }}>
@@ -124,29 +125,38 @@ const BSTViz = () => {
               "Please enter the number of nodes you want to insert in the Binary Search Tree "
             }
           </p>
-          <input
-            onChange={(e) => setNumber(e.target.value)}
-            placeholder={
-              containerWidth < 500 ? "between 3 and 30" : "between 3 and 100"
-            }
-            style={{ textAlign: "center" }}
-          />
-          <button
-            disabled={
-              (number > 100) |
-              (number < 3) |
-              running |
-              ((containerWidth < 500) & (number > 30))
-            }
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
           >
-            {running ? <div className="BUILDING" /> : "BUILD"}
-          </button>
+            <input
+              onChange={(e) => setNumber(e.target.value)}
+              placeholder={
+                containerWidth < 500 ? "between 3 and 30" : "between 3 and 100"
+              }
+              style={{ textAlign: "center" }}
+            />
+            <button
+              disabled={
+                (number > 100) |
+                (number < 3) |
+                running |
+                ((containerWidth < 500) & (number > 30))
+              }
+            >
+              {running ? <div className="BUILDING" /> : "BUILD"}
+            </button>
+          </div>
         </div>
       </form>
       <div
         ref={containerRef}
         className="vizContainer"
         style={{
+          width: "100%",
           height: 960,
         }}
       >
@@ -159,7 +169,6 @@ const BSTViz = () => {
           gap: "1rem",
         }}
       >
-        {" "}
         <span>{"Download current BST image:"}</span>
         <button
           disabled={running}
