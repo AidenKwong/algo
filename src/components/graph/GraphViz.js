@@ -137,7 +137,7 @@ const GraphViz = () => {
           </div>
         </div>
       </form>
-      <div ref={graphRef} className="vizContainer">
+      <div ref={graphRef} className="graphVizContainer">
         <div style={{ display: "flex", margin: "1em", gap: "1rem" }}>
           <p>queue:</p>
           {BFSqueue.map((d, i) => (
