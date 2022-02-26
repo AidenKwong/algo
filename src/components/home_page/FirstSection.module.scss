@@ -1,0 +1,21 @@
+@import "../../styles/variables";
+
+.title {
+}
+
+.example {
+  display: flex;
+  margin: 4em 0;
+  h2 {
+    flex: 1;
+  }
+  h2.end {
+    text-align: end;
+  }
+  img {
+    width: 45%;
+    max-width: 960px;
+    background-color: $green;
+    border-radius: 1em;
+  }
+}

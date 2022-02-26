@@ -1,11 +1,13 @@
-import "./GraphViz.scss";
+import styles from "./GraphViz.module.scss";
 import React, { useState, useRef, useEffect } from "react";
 import constructGraph from "./constructGraph";
 import { saveSvgAsPng } from "save-svg-as-png";
 import * as d3 from "d3";
 import * as echarts from "echarts";
 import { SVGRenderer, CanvasRenderer } from "echarts/renderers";
-import constructAdjacencyList from "./traversal";
+import BFS from "./BFS";
+import { AiOutlineCaretRight } from "react-icons/ai";
+import { MdOutlineRefresh } from "react-icons/md";
 
 var myChart = echarts.extendComponentModel;
 echarts.use([SVGRenderer, CanvasRenderer]);
@@ -14,14 +16,25 @@ const GraphViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
   const [EChartOption, setEChartOption] = useState(null);
-  const [BFSpath, setBFSpath] = useState([0, 0]);
+  const [BFSpath, setBFSpath] = useState(["", ""]);
   const [BFSqueue, setBFSqueue] = useState([]);
+  const [built, setBuilt] = useState(false);
   const maxLength = 30;
   const graphRef = useRef();
 
   useEffect(() => {
     myChart = echarts.init(graphRef.current, null, {
       renderer: "svg",
+    });
+    myChart.on("click", { dataType: "node" }, (params) => {
+      for (var i = 0; i < BFSpath.length; i++) {
+        if (BFSpath[i] === "") {
+          setBFSpath((prev) => {
+            prev[i] = +params.name;
+            return [...prev];
+          });
+        }
+      }
     });
   }, []);
 
@@ -33,6 +46,7 @@ const GraphViz = () => {
             force: {
               layoutAnimation: false,
             },
+
             data: EChartOption.series[0].data,
             edges: EChartOption.series[0].edges,
           },
@@ -41,52 +55,50 @@ const GraphViz = () => {
     }
   }, [EChartOption]);
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   const handleRun = (e) => {
     e.preventDefault();
     setRunning(true);
-    constructGraph(myChart, number, setRunning, setEChartOption);
+    constructGraph(myChart, number, setRunning, setEChartOption, setBuilt);
   };
 
   const handleTraversal = (e) => {
     e.preventDefault();
     setRunning(true);
-    constructAdjacencyList(
-      BFSpath[0] + "",
-      BFSpath[1] + "",
-      EChartOption.series[0].data,
-      EChartOption.series[0].edges,
-      setEChartOption,
-      setBFSqueue,
-      setRunning
-    );
+    if (BFSpath)
+      BFS(
+        BFSpath[0] + "",
+        BFSpath[1] + "",
+        EChartOption.series[0].data,
+        EChartOption.series[0].edges,
+        setEChartOption,
+        setBFSqueue,
+        setRunning
+      );
   };
 
   return (
     <div>
-      <h1>Graph</h1>
+      <div className={styles.header}>
+        <h1>Graph</h1>
+        <button className="secondaryBtn" onClick={refreshPage}>
+          <MdOutlineRefresh />
+          {`refresh`}
+        </button>
+      </div>
+
       <form onSubmit={handleRun}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <p style={{ fontSize: "1rem" }}>
+        <div className={styles.buildPrompt}>
+          <p>
             {`Enter the number of nodes you want to contruct the random graph ( < ${maxLength} )`}
           </p>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
+          <div className={styles.inputButtonGroup}>
             <input
               onChange={(e) => setNumber(e.target.value)}
               placeholder={`< ${maxLength}`}
-              style={{ textAlign: "center" }}
             />
             <button disabled={running | (number > maxLength)}>
               {running ? <div className="RUNNING" /> : "BUILD"}
@@ -94,23 +106,11 @@ const GraphViz = () => {
           </div>
         </div>
       </form>
+
       <form onSubmit={handleTraversal}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <p style={{ fontSize: "1rem" }}>{`Breadth First Search: `}</p>
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
+        <div className={styles.buildPrompt}>
+          <p>{`Breadth First Search: ( if not set, default is 0 )`}</p>
+          <div className={styles.inputButtonGroup}>
             <input
               onChange={(e) =>
                 setBFSpath((prev) => {
@@ -119,7 +119,7 @@ const GraphViz = () => {
                 })
               }
               placeholder={`start`}
-              style={{ textAlign: "center" }}
+              value={BFSpath[0]}
             />
             <input
               onChange={(e) =>
@@ -129,21 +129,37 @@ const GraphViz = () => {
                 })
               }
               placeholder={`target`}
-              style={{ textAlign: "center" }}
+              value={BFSpath[1]}
             />
-            <button disabled={running | (number > maxLength)}>
+            <button
+              disabled={
+                running | (number > maxLength) | !built | (BFSpath === ["", ""])
+              }
+            >
               {running ? <div className="RUNNING" /> : "SEARCH"}
             </button>
           </div>
         </div>
       </form>
-      <div ref={graphRef} className="graphVizContainer">
-        <div style={{ display: "flex", margin: "1em", gap: "1rem" }}>
-          <p>queue:</p>
-          {BFSqueue.map((d, i) => (
-            <p key={i}>{d}</p>
-          ))}
+
+      <div className={styles.vizContainer}>
+        <div className={styles.vizDescription}>
+          <span className={styles.queue}>
+            <p>queue</p>
+            <AiOutlineCaretRight style={{ margin: "auto 0" }} />
+            {BFSqueue.map((d, i) => (
+              <p key={i}>{d}</p>
+            ))}
+          </span>
+          <p className={styles.prompt}>
+            {BFSpath[0] === ""
+              ? `please select start node`
+              : BFSpath[1] === "" || BFSpath[0] === BFSpath[1]
+              ? `please select target node`
+              : BFSpath[0] !== BFSpath[1] && "please click search button"}
+          </p>
         </div>
+        <div ref={graphRef} className={styles.render} />
       </div>
       <div
         style={{
@@ -152,7 +168,7 @@ const GraphViz = () => {
           gap: "1rem",
         }}
       >
-        <span>{"Download current BST image:"}</span>
+        <span>{"Download current graph image:"}</span>
         <button
           disabled={running}
           onClick={() =>

@@ -5,7 +5,15 @@
 }
 
 a {
+  all: unset;
+  cursor: pointer;
   text-decoration: none;
+}
+
+h1,
+h2,
+h3 {
+  color: $blue;
 }
 
 input {
@@ -28,6 +36,9 @@ button {
   font-family: "Inconsolata", monospace;
   height: 2rem;
   margin: 0.25em;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 button:enabled:hover {
@@ -38,6 +49,18 @@ button:enabled:hover {
 button:disabled {
   border-color: gray;
   background-color: lightgray;
+}
+
+button.secondaryBtn {
+  background-color: white;
+  border: 0.15em solid $blue;
+}
+button.secondaryBtn:hover {
+  background-color: white;
+}
+
+.websiteName {
+  color: $blue;
 }
 
 .pageNav {
@@ -51,12 +74,18 @@ button:disabled {
   padding: 2rem;
 }
 
+.homePage {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 600px) {
   .page {
     padding: 0;
   }
 
   h1,
+  h2,
   h3,
   p,
   button,

@@ -1,4 +1,4 @@
-const constructGraph = (myChart, n, setRunning, setEChartOption) => {
+const constructGraph = (myChart, n, setRunning, setEChartOption, setBuilt) => {
   const data = [
     {
       fixed: false,
@@ -15,10 +15,10 @@ const constructGraph = (myChart, n, setRunning, setEChartOption) => {
       {
         type: "graph",
         layout: "force",
-        silent: true,
-        emphasis: {
-          disabled: true,
-        },
+        // silent: true,
+        // emphasis: {
+        //   disabled: true,
+        // },
         lineStyle: {
           color: "#3d405b",
           width: 3,
@@ -73,6 +73,7 @@ const constructGraph = (myChart, n, setRunning, setEChartOption) => {
     if (data.length > n) {
       clearInterval(myInterval);
       setRunning(false);
+      setBuilt(true);
       setEChartOption(option);
     }
   }, 50);

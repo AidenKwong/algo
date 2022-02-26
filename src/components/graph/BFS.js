@@ -1,6 +1,6 @@
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
-const constructAdjacencyList = (
+const BFS = (
   start,
   target,
   nodes,
@@ -103,4 +103,4 @@ const constructAdjacencyList = (
   return AdjLst;
 };
 
-export default constructAdjacencyList;
+export default BFS;

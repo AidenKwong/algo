@@ -1,0 +1,52 @@
+@import "../../styles/variables";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.vizContainer {
+  background-color: $green;
+  width: 960px;
+  height: 960px;
+  margin: 0 auto;
+  border: 0.25em solid $blue;
+  display: flex;
+  flex-direction: column;
+  .render {
+    width: 960px;
+    height: 960px;
+  }
+}
+
+.buildPrompt {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.inputButtonGroup {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  input {
+    text-align: center;
+  }
+}
+
+.vizDescription {
+  display: flex;
+  font-weight: 500;
+  padding: 1em;
+  justify-content: space-between;
+  .queue {
+    color: $blue;
+    display: flex;
+    gap: 1rem;
+  }
+  .prompt {
+    font-weight: 400;
+    color: $blue;
+  }
+}
