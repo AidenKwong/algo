@@ -3,7 +3,7 @@ import FirstSection from "../components/home_page/FirstSection";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="page homePage">
       <FirstSection />
     </div>
   );
