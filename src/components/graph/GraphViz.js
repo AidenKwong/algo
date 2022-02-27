@@ -27,16 +27,20 @@ const GraphViz = () => {
       renderer: "svg",
     });
     myChart.on("click", { dataType: "node" }, (params) => {
-      for (var i = 0; i < BFSpath.length; i++) {
-        if (BFSpath[i] === "") {
-          setBFSpath((prev) => {
-            prev[i] = +params.name;
-            return [...prev];
-          });
-        }
+      if (BFSpath[0] === "") {
+        setBFSpath((prev) => {
+          prev[0] = +params.name;
+          return [...prev];
+        });
+      }
+      if (BFSpath[1] === "") {
+        setBFSpath((prev) => {
+          prev[1] = +params.name;
+          return [...prev];
+        });
       }
     });
-  }, []);
+  }, [BFSpath]);
 
   useEffect(() => {
     if (EChartOption) {

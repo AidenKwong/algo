@@ -9,15 +9,15 @@ const FirstSection = () => {
 
       <div className={styles.example}>
         <h2>{`Graph with BFS`}</h2>
-        <img src="/assets/images/graph_example.png" />
+        <img src="/assets/images/graph_example.png" alt="graph_example.png" />
       </div>
       <div className={styles.example}>
         <h2>{`Binary Search Tree`}</h2>
-        <img src="/assets/images/BST_example.png" />
+        <img src="/assets/images/BST_example.png" alt="BST_example.png" />
       </div>
       <div className={styles.example}>
         <h2>{`Sorting`}</h2>
-        <img src="/assets/images/sort_example.png" />
+        <img src="/assets/images/sort_example.png" alt="sort_example.png" />
       </div>
     </div>
   );
