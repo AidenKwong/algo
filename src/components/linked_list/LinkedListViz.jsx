@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import * as echarts from "echarts";
 import LinkedList from "./linked_list";
 
 const LinkedListViz = () => {
