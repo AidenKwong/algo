@@ -7,9 +7,6 @@ const LinkedListViz = () => {
   const [list, setList] = useState(new LinkedList(0));
 
   useEffect(() => {
-    var myChart = echarts.init(graphRef.current, null, {
-      renderer: "svg",
-    });
     var tempList = list;
     for (let i = 0; i < 10; i++) {
       tempList.add(Math.ceil(Math.random() * 100));
