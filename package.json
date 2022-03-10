@@ -19,7 +19,9 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "save-svg-as-png": "^1.4.17",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -4,3 +4,14 @@ $green: #81b29a;
 $dimGreen: #619e81;
 $black: #191923;
 $lightGray: #ebebeb;
+$gray: #bdbdbd;
+$white: #fff;
+
+:export {
+  blue: $blue;
+  lightBrown: $lightBrown;
+  green: $green;
+  dimGreen: $dimGreen;
+  black: $black;
+  lightGray: $lightGray;
+}

@@ -4,6 +4,18 @@
 .App {
 }
 
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background: $lightBrown;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $gray;
+}
+
 a {
   all: unset;
   cursor: pointer;
@@ -14,6 +26,14 @@ h1,
 h2,
 h3 {
   color: $blue;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2em 2em;
+  border-bottom: 0.2em solid $lightGray;
 }
 
 input {
@@ -47,20 +67,22 @@ button:enabled:hover {
 }
 
 button:disabled {
-  border-color: gray;
-  background-color: lightgray;
+  border-color: $gray;
+  background-color: $lightGray;
 }
 
 button.secondaryBtn {
-  background-color: white;
+  background-color: $white;
   border: 0.15em solid $blue;
 }
 button.secondaryBtn:hover {
-  background-color: white;
+  background-color: $white;
 }
 
 .websiteName {
   color: $blue;
+  font-family: "Righteous", cursive;
+  width: max-content;
 }
 
 .pageNav {
@@ -71,6 +93,7 @@ button.secondaryBtn:hover {
 }
 
 .page {
+  min-height: 105vh;
   padding: 2rem;
 }
 

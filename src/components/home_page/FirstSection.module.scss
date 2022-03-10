@@ -32,6 +32,7 @@
   display: flex;
   justify-content: center;
   padding: 1em;
+  box-shadow: 0 0.5em 1em -0.5em $black;
   img {
     max-width: 100%;
   }
