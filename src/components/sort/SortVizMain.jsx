@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./SortVizMain.scss";
 import PrismCode from "./PrismCode";
+import variables from "../../styles/_variables.scss";
 const SortVizMain = ({
   title,
   instruction,
@@ -12,6 +13,13 @@ const SortVizMain = ({
   maxLength,
   code,
 }) => {
+  const vizRef = useRef();
+  const vizWidth = vizRef.current?.clientWidth - 8;
+  const vizHeight = vizRef.current?.clientHeight - 8;
+  const containerObserver = new ResizeObserver((entries) => {});
+
+  vizRef.current && containerObserver.observe(vizRef.current);
+
   return (
     <div className="vizMain">
       <h1>{title}</h1>
@@ -46,18 +54,23 @@ const SortVizMain = ({
         </div>
       </form>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        <div className="vizContainer">
-          {output.map((num, i) => (
-            <div
-              key={i}
-              style={{
-                backgroundColor: "#3d405b",
-                marginLeft: `${output.length <= 400 ? "1px" : "none"}`,
-                width: `${(1 / output.length) * 100}%`,
-                height: `${(num / Math.max(...output)) * 100}%`,
-              }}
-            />
-          ))}
+        <div className="vizContainer" ref={vizRef}>
+          <svg width={vizWidth} height={vizHeight}>
+            {output.map((num, i) => (
+              <rect
+                key={i}
+                x={(i * vizWidth) / output.length}
+                y={vizHeight - (num * vizHeight) / Math.max(...output)}
+                width={
+                  output.length > 480
+                    ? vizWidth / output.length + 1
+                    : vizWidth / output.length - 1
+                }
+                height={(num / Math.max(...output)) * vizHeight}
+                fill={variables.blue}
+              />
+            ))}
+          </svg>
         </div>
         <div className="vizCodeMain">
           <h3>JS</h3>
