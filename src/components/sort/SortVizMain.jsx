@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import "./SortVizMain.scss";
 import PrismCode from "./PrismCode";
 import variables from "../../styles/_variables.scss";
+import { saveSvgAsPng } from "save-svg-as-png";
+import * as d3 from "d3";
 const SortVizMain = ({
   title,
   instruction,
@@ -83,6 +85,26 @@ const SortVizMain = ({
             language={"javascript"}
           />
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <span>{"Download current linked list image:"}</span>
+        <button
+          disabled={running}
+          onClick={() =>
+            saveSvgAsPng(
+              d3.select(vizRef.current).select("svg").node(),
+              "Graph.png"
+            )
+          }
+        >
+          {running ? <div className="BUILDING" /> : "Download"}
+        </button>
       </div>
     </div>
   );
