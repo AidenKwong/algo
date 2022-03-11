@@ -32,8 +32,12 @@ h3 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.2em 2em;
+  height: 4rem;
+  padding: 0em 2em;
   border-bottom: 0.2em solid $lightGray;
+  @media only screen and (max-width: 768px) {
+    padding: 0 0.75em 0 0;
+  }
 }
 
 input {
@@ -83,13 +87,9 @@ button.secondaryBtn:hover {
   color: $blue;
   font-family: "Righteous", cursive;
   width: max-content;
-}
-
-.pageNav {
-  display: flex;
-  justify-content: center;
-  list-style-type: none;
-  gap: 2rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .page {

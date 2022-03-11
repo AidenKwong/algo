@@ -1,13 +1,16 @@
 /** @jsxImportSource @emotion/react */
 import "./App.scss";
 import { Link, Routes, Route } from "react-router-dom";
-import SortPage from "./pages/SortPage";
 
-import TreePage from "./pages/TreePage";
-import GraphPage from "./pages/GraphPage";
-import HomePage from "./pages/HomePage";
-import LinkedListPage from "./pages/LinkedListPage";
-import Navbar from "./components/Navbar";
+import {
+  TreePage,
+  GraphPage,
+  HomePage,
+  LinkedListPage,
+  SortPage,
+} from "./pages";
+
+import Navbar from "./components/navbar/Navbar";
 
 const App = () => {
   return (

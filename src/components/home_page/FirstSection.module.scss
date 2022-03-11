@@ -26,7 +26,7 @@
 
 .imgContainer {
   background-color: $green;
-  border-radius: 1em;
+  border: 0.25em solid $blue;
   flex: 1;
   flex-direction: column;
   display: flex;

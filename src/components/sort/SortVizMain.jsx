@@ -55,7 +55,10 @@ const SortVizMain = ({
       </form>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         <div className="vizContainer" ref={vizRef}>
-          <svg width={vizWidth} height={vizHeight}>
+          <svg
+            width={vizWidth ? vizWidth : 100}
+            height={vizHeight ? vizHeight : 100}
+          >
             {output.map((num, i) => (
               <rect
                 key={i}
