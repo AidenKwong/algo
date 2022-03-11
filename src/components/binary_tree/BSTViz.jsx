@@ -156,7 +156,7 @@ const BSTViz = () => {
         ref={containerRef}
         className="vizContainer"
         style={{
-          width: "100%",
+          flex: 1,
           height: 960,
         }}
       >

@@ -7,14 +7,12 @@
 
 .vizContainer {
   background-color: $green;
-  width: 960px;
   height: 960px;
   margin: 0 auto;
   border: 0.25em solid $blue;
   display: flex;
   flex-direction: column;
   .render {
-    width: 960px;
     height: 960px;
   }
 }
