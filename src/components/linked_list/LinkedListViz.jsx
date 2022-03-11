@@ -52,7 +52,7 @@ const LinkedListViz = () => {
             // offset: [-5, 0],
           },
           edgeSymbol: ["none", "arrow"],
-          data: output,
+          data: [],
           // links: [],
           links: [],
         },
