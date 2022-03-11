@@ -71,6 +71,7 @@ const Navbar = () => {
     align-items: center;
     list-style: none;
     gap: 2rem;
+    z-index: 10;
   `;
 
   const menuButton = css`

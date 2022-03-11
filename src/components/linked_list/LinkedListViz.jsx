@@ -3,6 +3,8 @@ import LinkedList from "./linked_list";
 import * as echarts from "echarts";
 import { SVGRenderer, CanvasRenderer } from "echarts/renderers";
 import styles from "./LinkedListViz.module.scss";
+import { saveSvgAsPng } from "save-svg-as-png";
+import * as d3 from "d3";
 
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -106,7 +108,7 @@ const LinkedListViz = () => {
   };
 
   return (
-    <>
+    <div>
       <h3>In Progress...</h3>
       <form onSubmit={handleRun}>
         <div className={styles.buildPrompt}>
@@ -124,12 +126,28 @@ const LinkedListViz = () => {
           </div>
         </div>
       </form>
+      <div className={styles.vizContainer} ref={graphRef} />
       <div
-        className={styles.vizContainer}
-        ref={graphRef}
-        style={{ width: "100%", height: "50vh" }}
-      />
-    </>
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "1rem",
+        }}
+      >
+        <span>{"Download current linked list image:"}</span>
+        <button
+          disabled={running}
+          onClick={() =>
+            saveSvgAsPng(
+              d3.select(graphRef.current).select("svg").node(),
+              "Graph.png"
+            )
+          }
+        >
+          {running ? <div className="BUILDING" /> : "Download"}
+        </button>
+      </div>
+    </div>
   );
 };
 
