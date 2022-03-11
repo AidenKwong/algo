@@ -35,7 +35,8 @@ const Navbar = () => {
     margin: 0.5rem;
     font-weight: 600;
     color: ${variables.green};
-    border-top: ${location.pathname === `${path}` && "0.25em solid white"};
+    border-top: ${(location.pathname === `${path}`) &
+      (windowDimensions.width > 1024) && "0.25em solid white"};
     border-bottom: ${location.pathname === `${path}` && "0.25em solid"};
     span {
       padding: 0.5rem 1rem;
@@ -61,7 +62,7 @@ const Navbar = () => {
     background-color: ${windowDimensions.width < 1024
       ? variables.lightBrown
       : "transparent"};
-    border: ${windowDimensions.width < 1024
+    outline: ${windowDimensions.width < 1024
       ? `0.2em solid ${variables.blue}`
       : "none"};
 
@@ -86,16 +87,32 @@ const Navbar = () => {
       </span>
 
       <div className={pageNav}>
-        <Link to="/linked-list" className={navItem("/linked-list")}>
+        <Link
+          to="/linked-list"
+          className={navItem("/linked-list")}
+          onClick={() => setOpen(false)}
+        >
           <span>LINKED LIST</span>
         </Link>
-        <Link to="/graph" className={navItem("/graph")}>
+        <Link
+          to="/graph"
+          className={navItem("/graph")}
+          onClick={() => setOpen(false)}
+        >
           <span>GRAPH</span>
         </Link>
-        <Link to="/tree" className={navItem("/tree")}>
+        <Link
+          to="/tree"
+          className={navItem("/tree")}
+          onClick={() => setOpen(false)}
+        >
           <span>BST</span>
         </Link>
-        <Link to="/sort" className={navItem("/sort")}>
+        <Link
+          to="/sort"
+          className={navItem("/sort")}
+          onClick={() => setOpen(false)}
+        >
           <span>SORT</span>
         </Link>
       </div>
