@@ -11,6 +11,7 @@ import {
 } from "./pages";
 
 import Navbar from "./components/navbar/Navbar";
+import FooterSection from "./pages/footer/FooterSection";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/tree" element={<TreePage />} />
         <Route path="/sort" element={<SortPage />} />
       </Routes>
+      <FooterSection />
     </div>
   );
 };

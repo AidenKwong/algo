@@ -3,7 +3,8 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 4em;
+  gap: 2rem;
+  margin-bottom: 8rem;
 }
 
 .title {
@@ -58,6 +59,7 @@
 }
 
 .imgContainer {
+  transition: all 0.3s ease-in-out;
   background-color: $green;
   border: 0.25em solid $blue;
   flex: 1;
@@ -66,7 +68,12 @@
   justify-content: center;
   padding: 1em;
   box-shadow: 0 0.5em 1em -0.5em $black;
+
   img {
     max-width: 100%;
   }
+}
+
+.imgContainer:hover {
+  transform: scale(1.05);
 }

@@ -1,0 +1,9 @@
+@import "/src/styles/variables";
+
+.footer {
+  border-top: 0.2em solid $green;
+  padding: 2rem;
+  height: 10vh;
+  display: flex;
+  justify-content: space-around;
+}

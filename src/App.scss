@@ -24,8 +24,16 @@ a {
 
 h1,
 h2,
-h3 {
+h3,
+h4,
+h5,
+h6,
+p {
   color: $blue;
+}
+
+p {
+  font-weight: 500;
 }
 
 .header {
@@ -98,6 +106,9 @@ button.secondaryBtn:hover {
 }
 
 .homePage {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
   max-width: 1280px;
   margin: 0 auto;
 }

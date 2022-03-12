@@ -3,6 +3,7 @@ import styles from "./FirstSection.module.scss";
 import graph_img from "../../assets/images/graph_example.png";
 import BST_img from "../../assets/images/BST_example.png";
 import sort_img from "../../assets/images/sort_example.png";
+import linked_list_img from "../../assets/images/linked_list_example.png";
 import { Link } from "react-router-dom";
 
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -86,7 +87,7 @@ const FirstSection = () => {
         </div>
 
         <div className={styles.title2ndPart}>
-          <p>{sentence}</p>
+          <h4>{sentence}</h4>
           <button disabled={running} onClick={Simple_Sorting_Algo}>
             {running ? (
               <div className="SORTING" />
@@ -103,6 +104,12 @@ const FirstSection = () => {
         <h2>{`Current available DSA 💯`}</h2>
       </div>
       <div className={styles.gridOfExamples}>
+        <div className={styles.example}>
+          <h3>{`Graph with Linked List ✅`}</h3>
+          <Link to="/linked-list" className={styles.imgContainer}>
+            <img src={linked_list_img} alt="linked_list_example.png" />
+          </Link>
+        </div>
         <div className={styles.example}>
           <h3>{`Graph with BFS ✅`}</h3>
           <Link to="/graph" className={styles.imgContainer}>
