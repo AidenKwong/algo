@@ -25,6 +25,7 @@ const SelectionSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState([]);
+  const [checkingIdx, setCheckingIdx] = useState({ curr: null, check: null });
 
   const handleOnChange = (e) => {
     setNumber(e.target.value);
@@ -49,6 +50,7 @@ const SelectionSortViz = () => {
         for (var j = i + 1; j < n; j++) {
           if (sortedArr[j] < sortedArr[min]) {
             min = j;
+            setCheckingIdx({ curr: i, check: j });
             setOutput([...sortedArr]);
             await timer(10);
           }
@@ -60,6 +62,7 @@ const SelectionSortViz = () => {
           sortedArr[min] = tmp;
         }
       }
+      setCheckingIdx({ curr: null, check: null });
       return setRunning(false);
     };
     send().then(() => setOutput([...sortedArr]));
@@ -70,6 +73,7 @@ const SelectionSortViz = () => {
       title="Selection Sort"
       instruction="Please enter the length of array "
       output={output}
+      checkingIdx={checkingIdx}
       handleRun={handleRun}
       handleOnChange={handleOnChange}
       running={running}

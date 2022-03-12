@@ -1,4 +1,5 @@
 $blue: #3d405b;
+$red: #e07a5f;
 $lightBrown: #f4f1de;
 $green: #81b29a;
 $dimGreen: #619e81;
@@ -9,10 +10,12 @@ $white: #fff;
 
 :export {
   blue: $blue;
+  red: $red;
   lightBrown: $lightBrown;
   green: $green;
   dimGreen: $dimGreen;
   black: $black;
+  gray: $gray;
   lightGray: $lightGray;
   white: $white;
 }

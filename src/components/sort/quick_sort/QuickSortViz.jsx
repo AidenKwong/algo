@@ -49,12 +49,13 @@ const partition = (arr, start, end) => {
   [arr[pivotIndex], arr[end]] = [arr[end], arr[pivotIndex]];
   return pivotIndex;
 };
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const QuickSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState([]);
-  const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+  const [checkingIdx, setCheckingIdx] = useState({ curr: null, check: null });
 
   const handleOnChange = (e) => {
     setNumber(e.target.value);
@@ -81,9 +82,11 @@ const QuickSortViz = () => {
         stack.push(pivotIndex + 1);
         stack.push(end);
       }
+      setCheckingIdx({ curr: end, check: start });
       setOutput([...arr]);
       await timer(10);
     }
+    setCheckingIdx({ curr: null, check: null });
     setOutput([...arr]);
     return setRunning(false);
   };
@@ -104,6 +107,7 @@ const QuickSortViz = () => {
       title="Quick Sorting"
       instruction="Please enter the length of array "
       output={output}
+      checkingIdx={checkingIdx}
       handleRun={handleRun}
       handleOnChange={handleOnChange}
       running={running}

@@ -13,12 +13,12 @@ const code = `const simpleSort = (array) => {
 }
 return array;
 }`;
-
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 const SimpleSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState([]);
-  const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+  const [checkingIdx, setCheckingIdx] = useState({ curr: null, check: null });
 
   const handleOnChange = (e) => {
     setNumber(e.target.value);
@@ -44,12 +44,13 @@ const SimpleSortViz = () => {
             var tmp = sortedArr[i];
             sortedArr[i] = sortedArr[j];
             sortedArr[j] = tmp;
-
-            setOutput([...sortedArr]);
+            setCheckingIdx({ curr: i, check: j });
             await timer(10);
+            setOutput([...sortedArr]);
           }
         }
       }
+      setCheckingIdx({ curr: null, check: null });
       return setRunning(false);
     };
     send();
@@ -60,6 +61,7 @@ const SimpleSortViz = () => {
       title="Simeple Sort"
       instruction="Please enter the length of array "
       output={output}
+      checkingIdx={checkingIdx}
       handleRun={handleRun}
       handleOnChange={handleOnChange}
       running={running}

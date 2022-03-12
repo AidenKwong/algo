@@ -17,12 +17,13 @@ const code = `const bubbleSort = (array) => {
 	return array;
 };
 `;
+const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BubbleSortViz = () => {
   const [number, setNumber] = useState(0);
   const [running, setRunning] = useState(false);
   const [output, setOutput] = useState([]);
-  const timer = (ms) => new Promise((res) => setTimeout(res, ms));
+  const [checkingIdx, setCheckingIdx] = useState({ curr: null, check: null });
 
   const handleOnChange = (e) => {
     setNumber(e.target.value);
@@ -47,6 +48,7 @@ const BubbleSortViz = () => {
         swapped = false;
         for (var i = n; i >= 0; i--) {
           if (sortedArr[i] > sortedArr[i + 1]) {
+            setCheckingIdx({ curr: i, check: i + 1 });
             var temp = sortedArr[i];
             sortedArr[i] = sortedArr[i + 1];
             sortedArr[i + 1] = temp;
@@ -56,7 +58,7 @@ const BubbleSortViz = () => {
           await timer(1);
         }
       } while (swapped);
-
+      setCheckingIdx({ curr: null, check: null });
       setRunning(false);
     };
     send();
@@ -68,6 +70,7 @@ const BubbleSortViz = () => {
       title="Bubble Sort"
       instruction="Please enter the length of array "
       output={output}
+      checkingIdx={checkingIdx}
       handleRun={handleRun}
       handleOnChange={handleOnChange}
       running={running}

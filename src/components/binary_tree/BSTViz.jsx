@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { BinarySearchTree } from "./BST_structure";
 import * as d3 from "d3";
-import "./BSTViz.scss";
+import styles from "./BSTViz.module.scss";
 import { saveSvgAsPng } from "save-svg-as-png";
 
 const yOffSet = 36;
@@ -10,9 +10,9 @@ const timer = (ms) => new Promise((res) => setTimeout(res, ms));
 
 const BSTTemplate = () => {
   const BST = new BinarySearchTree();
-  for (var i = 0; i < 5; i++) {
-    BST.insert(Math.ceil(Math.random() * 10));
-  }
+
+  BST.insert(0);
+
   return BST;
 };
 
@@ -154,7 +154,7 @@ const BSTViz = () => {
       </form>
       <div
         ref={containerRef}
-        className="vizContainer"
+        className={styles.vizContainer}
         style={{
           flex: 1,
           height: 960,

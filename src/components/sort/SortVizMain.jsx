@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./SortVizMain.scss";
+import styles from "./SortVizMain.module.scss";
 import PrismCode from "./PrismCode";
 import variables from "../../styles/_variables.scss";
 import { saveSvgAsPng } from "save-svg-as-png";
@@ -8,12 +8,14 @@ const SortVizMain = ({
   title,
   instruction,
   output,
+  checkingIdx,
   handleRun,
   handleOnChange,
   running,
   number,
   maxLength,
   code,
+  MIN_MERGE,
 }) => {
   const vizRef = useRef();
   const vizWidth = vizRef.current?.clientWidth - 8;
@@ -56,7 +58,24 @@ const SortVizMain = ({
         </div>
       </form>
       <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-        <div className="vizContainer" ref={vizRef}>
+        <div className={styles.legends}>
+          {checkingIdx && (
+            <>
+              <span>{`Index:`}</span>
+              <svg width={20} height={16}>
+                <rect x={4} width={16} height={16} fill={"white"} />
+              </svg>
+              <span> {`curr: ${checkingIdx?.curr}`}</span>
+              <svg width={20} height={16}>
+                <rect x={4} width={16} height={16} fill={"red"} />
+              </svg>
+              <span> {`swap: ${checkingIdx?.check}`}</span>
+            </>
+          )}
+
+          {MIN_MERGE ? `MIN_MERGE: ${MIN_MERGE}` : null}
+        </div>
+        <div className={styles.vizContainer} ref={vizRef}>
           <svg
             width={vizWidth ? vizWidth : 100}
             height={vizHeight ? vizHeight : 100}
@@ -72,12 +91,18 @@ const SortVizMain = ({
                     : vizWidth / output.length - 1
                 }
                 height={(num / Math.max(...output)) * vizHeight}
-                fill={variables.blue}
+                fill={
+                  checkingIdx?.curr === i
+                    ? "white"
+                    : checkingIdx?.check === i
+                    ? "red"
+                    : variables.blue
+                }
               />
             ))}
           </svg>
         </div>
-        <div className="vizCodeMain">
+        <div className={styles.vizCodeMain}>
           <h3>JS</h3>
           <PrismCode
             style={{ overflow: "scroll" }}

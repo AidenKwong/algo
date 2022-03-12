@@ -7,6 +7,39 @@
 }
 
 .title {
+  padding: 4rem 0;
+  .heading {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: $blue;
+    margin: 0 auto;
+    background-color: $lightBrown;
+    padding: 2rem 6rem;
+    border-radius: 0.25em;
+    @media only screen and (max-width: 768px) {
+      font-size: 2rem;
+      padding: 1rem 3rem;
+    }
+  }
+}
+
+.title2ndPart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 8rem;
+  margin: 4rem 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: auto;
+    margin: 2rem 0;
+    font-weight: 500;
+  }
 }
 
 .DSAtitle {

@@ -19,7 +19,7 @@ const code = `const timSort = (arr) => {
   return arr;
 };`;
 
-var MIN_MERGE = 32;
+const MIN_MERGE = 64;
 
 const minRunLength = (n) => {
   var r = 0;
@@ -114,10 +114,12 @@ const TimSortViz = () => {
         var right = Math.min(left + 2 * size - 1, n - 1);
 
         if (mid < right) merge(arr, left, mid, right);
+
         setOutput([...arr]);
         await timer(10);
       }
     }
+
     setOutput([...arr]);
     return setRunning(false);
   };
@@ -144,6 +146,7 @@ const TimSortViz = () => {
       number={number}
       maxLength={5000}
       code={code}
+      MIN_MERGE={MIN_MERGE}
     />
   );
 };
