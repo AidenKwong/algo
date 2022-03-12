@@ -118,7 +118,7 @@ const FirstSection = () => {
         </div>
         <div className={styles.example}>
           <h3>{`Binary Search Tree ✅`}</h3>
-          <Link to="/BST" className={styles.imgContainer}>
+          <Link to="/tree" className={styles.imgContainer}>
             <img src={BST_img} alt="BST_example.png" />
           </Link>
         </div>
