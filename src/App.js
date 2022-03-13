@@ -1,17 +1,10 @@
 /** @jsxImportSource @emotion/react */
 import "./App.scss";
-import { Link, Routes, Route } from "react-router-dom";
-
-import {
-  TreePage,
-  GraphPage,
-  HomePage,
-  LinkedListPage,
-  SortPage,
-} from "./pages";
+import { Link } from "react-router-dom";
 
 import Navbar from "./components/navbar/Navbar";
-import FooterSection from "./pages/footer/FooterSection";
+import FooterSection from "./components/footer/FooterSection";
+import PageRoutes from "./pages/PageRoutes";
 
 const App = () => {
   return (
@@ -22,14 +15,7 @@ const App = () => {
         </Link>
         <Navbar />
       </div>
-
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/linked-list" element={<LinkedListPage />} />
-        <Route path="/graph" element={<GraphPage />} />
-        <Route path="/tree" element={<TreePage />} />
-        <Route path="/sort" element={<SortPage />} />
-      </Routes>
+      <PageRoutes />
       <FooterSection />
     </div>
   );

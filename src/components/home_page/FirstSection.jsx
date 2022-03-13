@@ -4,6 +4,7 @@ import graph_img from "../../assets/images/graph_example.png";
 import BST_img from "../../assets/images/BST_example.png";
 import sort_img from "../../assets/images/sort_example.png";
 import linked_list_img from "../../assets/images/linked_list_example.png";
+import headingBg from "../../assets/images/patternpad.svg";
 import { Link } from "react-router-dom";
 
 const timer = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -81,7 +82,15 @@ const FirstSection = () => {
             alignItems: "center",
           }}
         >
-          <p className={styles.heading}>
+          <p
+            className={styles.heading}
+            style={{
+              backgroundImage: `url(${headingBg})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
             Visualize Data Structure and algorithms!{" "}
           </p>
         </div>

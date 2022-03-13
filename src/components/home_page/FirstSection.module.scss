@@ -18,6 +18,7 @@
     background-color: $lightBrown;
     padding: 2rem 6rem;
     border-radius: 0.25em;
+    text-shadow: 0.2rem 0.2rem 0.2rem $white;
     @media only screen and (max-width: 768px) {
       font-size: 2rem;
       padding: 1rem 3rem;
@@ -75,5 +76,7 @@
 }
 
 .imgContainer:hover {
-  transform: scale(1.05);
+  @media screen and (min-width: 768px) {
+    transform: scale(1.05);
+  }
 }
