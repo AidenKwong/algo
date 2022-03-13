@@ -11,7 +11,7 @@ const App = () => {
     <div className="App">
       <div className="header">
         <Link to="/">
-          <h1 className="websiteName">⚡ Algorithm Visualizer</h1>
+          <h1 className="websiteName"> Algorithm Visualizer</h1>
         </Link>
         <Navbar />
       </div>

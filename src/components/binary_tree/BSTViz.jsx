@@ -111,6 +111,14 @@ const BSTViz = () => {
   return (
     <div>
       <h1>Binary Search Tree</h1>
+      <p>
+        A binary search tree (BST), also called an ordered or sorted binary
+        tree, is a rooted binary tree data structure whose internal nodes each
+        store a key greater than all the keys in the node's left subtree and
+        less than those in its right subtree. The time complexity of operations
+        on the binary search tree is directly proportional to the height of the
+        tree.
+      </p>
       <form onSubmit={handleRun}>
         <div
           style={{

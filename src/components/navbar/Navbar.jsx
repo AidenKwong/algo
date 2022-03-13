@@ -18,7 +18,7 @@ const Navbar = () => {
     getWindowDimensions()
   );
   const [open, setOpen] = useState(false);
-
+  const medianDevice = windowDimensions.width < 1024;
   useEffect(() => {
     function handleResize() {
       setWindowDimensions(getWindowDimensions());
@@ -35,8 +35,8 @@ const Navbar = () => {
     margin: 0.5rem;
     font-weight: 600;
     color: ${variables.green};
-    border-top: ${(location.pathname === `${path}`) &
-      (windowDimensions.width > 1024) && "0.25em solid white"};
+    border-top: ${(location.pathname === `${path}`) & !medianDevice &&
+    "0.25em solid white"};
     border-bottom: ${location.pathname === `${path}` && "0.25em solid"};
     span {
       padding: 0.5rem 1rem;
@@ -48,26 +48,20 @@ const Navbar = () => {
   `;
 
   const pageNav = css`
-    transition: ${windowDimensions.width < 1024 && "transform 300ms ease"};
+    transition: ${medianDevice && "transform 300ms ease"};
     display: flex;
-    transform: ${(windowDimensions.width < 1024) & !open
-      ? "translateX(-100%)"
-      : "translateX(0)"};
-    opacity: ${(windowDimensions.width < 1024) & !open ? "0" : "1"};
+    transform: ${medianDevice & !open ? "translateX(-100%)" : "translateX(0)"};
+    opacity: ${medianDevice & !open ? "0" : "1"};
     justify-content: "center";
-    flex-direction: ${windowDimensions.width < 1024 ? "column" : "row"};
-    position: ${windowDimensions.width < 1024 ? "absolute" : "static"};
-    left: ${windowDimensions.width < 1024 ? "0" : "auto"};
-    top: ${windowDimensions.width < 1024 ? "4rem" : "auto"};
-    background-color: ${windowDimensions.width < 1024
-      ? variables.lightBrown
-      : "transparent"};
-    outline: ${windowDimensions.width < 1024
-      ? `0.2em solid ${variables.blue}`
-      : "none"};
+    flex-direction: ${medianDevice ? "column" : "row"};
+    position: ${medianDevice ? "absolute" : "static"};
+    left: ${medianDevice ? "0" : "auto"};
+    top: ${medianDevice ? "4rem" : "auto"};
+    background-color: ${medianDevice ? variables.lightBrown : "transparent"};
+    outline: ${medianDevice ? `0.2em solid ${variables.blue}` : "none"};
 
-    padding: ${windowDimensions.width < 1024 ? "1rem 0" : "0"};
-    width: ${windowDimensions.width < 1024 ? "100vw" : "auto"};
+    padding: ${medianDevice ? "1rem 0" : "0"};
+    width: ${medianDevice ? "100vw" : "auto"};
     align-items: center;
     list-style: none;
     gap: 2rem;
@@ -75,7 +69,7 @@ const Navbar = () => {
   `;
 
   const menuButton = css`
-    display: ${windowDimensions.width > 1024 ? "none" : "flex"};
+    display: ${!medianDevice ? "none" : "flex"};
     &:hover {
       cursor: pointer;
     }

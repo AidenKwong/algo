@@ -28,12 +28,15 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+pre {
   color: $blue;
+  font-family: "roboto", sans-serif;
 }
 
 p {
   font-weight: 500;
+  max-width: 1024px;
 }
 
 .header {
@@ -42,6 +45,11 @@ p {
   align-items: center;
   height: 4rem;
   padding: 0em 2em;
+  max-width: 100%;
+  top: 0;
+  left: 0;
+  position: sticky;
+  background-color: $white;
   border-bottom: 0.2em solid $lightGray;
   @media only screen and (max-width: 768px) {
     padding: 0 0.75em 0 0;
@@ -94,7 +102,6 @@ button.secondaryBtn:hover {
 .websiteName {
   color: $blue;
   font-family: "Righteous", cursive;
-  width: max-content;
   @media screen and (max-width: 768px) {
     font-size: 1.5rem;
   }
@@ -113,7 +120,7 @@ button.secondaryBtn:hover {
   margin: 0 auto;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .page {
     padding: 0.5rem;
   }
